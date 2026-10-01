@@ -1,0 +1,51 @@
+# Flutter and Dart generated files
+student_task_manager/.dart_tool/
+student_task_manager/.flutter-plugins
+student_task_manager/.flutter-plugins-dependencies
+student_task_manager/.pub-cache/
+student_task_manager/.pub/
+student_task_manager/build/
+student_task_manager/coverage/
+student_task_manager/**/doc/api/
+
+# Flutter platform build artifacts
+student_task_manager/android/.gradle/
+student_task_manager/android/app/debug/
+student_task_manager/android/app/profile/
+student_task_manager/android/app/release/
+student_task_manager/android/local.properties
+student_task_manager/android/**/GeneratedPluginRegistrant.java
+student_task_manager/ios/Flutter/Generated.xcconfig
+student_task_manager/ios/Flutter/ephemeral/
+student_task_manager/ios/Flutter/flutter_export_environment.sh
+student_task_manager/ios/Pods/
+student_task_manager/ios/Runner/GeneratedPluginRegistrant.*
+student_task_manager/macos/Flutter/ephemeral/
+student_task_manager/windows/flutter/ephemeral/
+
+# IDE files
+student_task_manager/.idea/
+student_task_manager/.vscode/
+student_task_manager/*.iml
+student_task_manager/*.ipr
+student_task_manager/*.iws
+student_task_manager/**/xcuserdata/
+
+# Android signing keys
+student_task_manager/**/*.jks
+student_task_manager/**/*.keystore
+student_task_manager/android/key.properties
+
+# Operating system and temporary files
+.DS_Store
+*.log
+*.swp
+*.swo
+*.tmp
+
+# Dart/Flutter generated metadata
+student_task_manager/**/app.*.symbols
+student_task_manager/**/app.*.map.json
+student_task_manager/**/.last_build_id
+student_task_manager/**/.generated/
+student_task_manager/**/.symlinks/
