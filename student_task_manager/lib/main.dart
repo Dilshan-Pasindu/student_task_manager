@@ -69,24 +69,37 @@ class _TaskHomePageState extends State<TaskHomePage> {
         padding: const EdgeInsets.all(16.0),
         child: Column(
           children: [
-            Row(
-              children: [
-                Expanded(
-                  child: TextField(
-                    controller: _taskController,
-                    decoration: const InputDecoration(
-                      labelText: 'Task name',
-                      hintText: 'Enter a task',
-                      border: OutlineInputBorder(),
+            const Align(
+              alignment: Alignment.centerLeft,
+              child: Text(
+                'My Tasks',
+                style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+              ),
+            ),
+            const SizedBox(height: 16),
+            Card(
+              child: Padding(
+                padding: const EdgeInsets.all(12),
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: TextField(
+                        controller: _taskController,
+                        decoration: const InputDecoration(
+                          labelText: 'Task name',
+                          hintText: 'Enter a task',
+                          border: OutlineInputBorder(),
+                        ),
+                      ),
                     ),
-                  ),
+                    const SizedBox(width: 12),
+                    ElevatedButton(
+                      onPressed: _addTask,
+                      child: const Text('Add Task'),
+                    ),
+                  ],
                 ),
-                const SizedBox(width: 12),
-                ElevatedButton(
-                  onPressed: _addTask,
-                  child: const Text('Add Task'),
-                ),
-              ],
+              ),
             ),
             const SizedBox(height: 16),
             Expanded(
