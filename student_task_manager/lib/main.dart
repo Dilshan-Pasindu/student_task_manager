@@ -56,7 +56,15 @@ class _TaskHomePageState extends State<TaskHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Student Task Manager')),
+      appBar: AppBar(
+        title: const Text('Student Task Manager'),
+        actions: [
+          Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Center(child: Text('Tasks: ${_tasks.length}')),
+          ),
+        ],
+      ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
