@@ -12,12 +12,14 @@ class TaskManagerApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Student Task Manager',
+      theme: ThemeData(
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
+        useMaterial3: true,
+      ),
       home: const TaskHomePage(),
     );
   }
 }
-
-final TextEditingController _taskController = TextEditingController();
 
 class TaskHomePage extends StatefulWidget {
   const TaskHomePage({super.key});
@@ -27,30 +29,40 @@ class TaskHomePage extends StatefulWidget {
 }
 
 class _TaskHomePageState extends State<TaskHomePage> {
+  final TextEditingController _taskController = TextEditingController();
+
   final List<String> _tasks = [];
 
   void _addTask() {
     final String taskName = _taskController.text.trim();
 
     if (taskName.isEmpty) {
-      return; // ignore empty input
+      return;
     }
 
     setState(() {
-      _tasks.add(taskName); // change the state
+      _tasks.add(taskName);
     });
 
-    ScaffoldMessenger.of(
-      context,
-    ).showSnackBar(const SnackBar(content: Text('Task added successfully!')));
+    _taskController.clear();
 
-    _taskController.clear(); // reset the field
+    ScaffoldMessenger.of(context)
+        .showSnackBar(const SnackBar(content: Text('Task added successfully')));
   }
 
   void _removeTask(int index) {
     setState(() {
-      _tasks.removeAt(index); // remove by position
+      _tasks.removeAt(index);
     });
+
+    ScaffoldMessenger.of(context)
+        .showSnackBar(const SnackBar(content: Text('Task removed')));
+  }
+
+  @override
+  void dispose() {
+    _taskController.dispose();
+    super.dispose();
   }
 
   @override
@@ -65,21 +77,27 @@ class _TaskHomePageState extends State<TaskHomePage> {
           ),
         ],
       ),
+
       body: Padding(
         padding: const EdgeInsets.all(16.0),
+
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Align(
-              alignment: Alignment.centerLeft,
-              child: Text(
-                'My Tasks',
-                style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-              ),
+            const Text(
+              'Welcome!',
+              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
             ),
+
+            const SizedBox(height: 8),
+
+            const Text('Add and manage your student tasks.'),
+
             const SizedBox(height: 16),
+
             Card(
               child: Padding(
-                padding: const EdgeInsets.all(12),
+                padding: const EdgeInsets.all(12.0),
                 child: Row(
                   children: [
                     Expanded(
@@ -92,7 +110,9 @@ class _TaskHomePageState extends State<TaskHomePage> {
                         ),
                       ),
                     ),
+
                     const SizedBox(width: 12),
+
                     ElevatedButton(
                       onPressed: _addTask,
                       child: const Text('Add Task'),
@@ -101,17 +121,33 @@ class _TaskHomePageState extends State<TaskHomePage> {
                 ),
               ),
             ),
+
             const SizedBox(height: 16),
+
+            Text(
+              'Total Tasks: ${_tasks.length}',
+              style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+            ),
+
+            const SizedBox(height: 8),
+
             Expanded(
               child: _tasks.isEmpty
-                  ? const Center(child: Text('No tasks available'))
+                  ? const Center(
+                      child: Text(
+                        'No tasks available',
+                        style: TextStyle(fontSize: 18),
+                      ),
+                    )
                   : ListView.builder(
                       itemCount: _tasks.length,
                       itemBuilder: (context, index) {
                         return Card(
                           child: ListTile(
-                            leading: const Icon(Icons.task_alt),
+                            leading: CircleAvatar(child: Text('${index + 1}')),
+
                             title: Text(_tasks[index]),
+
                             trailing: IconButton(
                               icon: const Icon(Icons.delete),
                               onPressed: () => _removeTask(index),
