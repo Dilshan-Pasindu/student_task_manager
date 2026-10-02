@@ -40,7 +40,17 @@ class _TaskHomePageState extends State<TaskHomePage> {
       _tasks.add(taskName); // change the state
     });
 
+    ScaffoldMessenger.of(
+      context,
+    ).showSnackBar(const SnackBar(content: Text('Task added successfully!')));
+
     _taskController.clear(); // reset the field
+  }
+
+  void _removeTask(int index) {
+    setState(() {
+      _tasks.removeAt(index); // remove by position
+    });
   }
 
   @override
@@ -81,6 +91,10 @@ class _TaskHomePageState extends State<TaskHomePage> {
                           child: ListTile(
                             leading: const Icon(Icons.task_alt),
                             title: Text(_tasks[index]),
+                            trailing: IconButton(
+                              icon: const Icon(Icons.delete),
+                              onPressed: () => _removeTask(index),
+                            ),
                           ),
                         );
                       },
