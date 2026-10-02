@@ -27,6 +27,22 @@ class TaskHomePage extends StatefulWidget {
 }
 
 class _TaskHomePageState extends State<TaskHomePage> {
+  final List<String> _tasks = [];
+
+  void _addTask() {
+    final String taskName = _taskController.text.trim();
+
+    if (taskName.isEmpty) {
+      return; // ignore empty input
+    }
+
+    setState(() {
+      _tasks.add(taskName); // change the state
+    });
+
+    _taskController.clear(); // reset the field
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -49,13 +65,27 @@ class _TaskHomePageState extends State<TaskHomePage> {
                 ),
                 const SizedBox(width: 12),
                 ElevatedButton(
-                  onPressed: () {}, // wired up in Task 07
+                  onPressed: _addTask,
                   child: const Text('Add Task'),
                 ),
               ],
             ),
             const SizedBox(height: 16),
-            // the task list goes here (Task 08)
+            Expanded(
+              child: _tasks.isEmpty
+                  ? const Center(child: Text('No tasks available'))
+                  : ListView.builder(
+                      itemCount: _tasks.length,
+                      itemBuilder: (context, index) {
+                        return Card(
+                          child: ListTile(
+                            leading: const Icon(Icons.task_alt),
+                            title: Text(_tasks[index]),
+                          ),
+                        );
+                      },
+                    ),
+            ),
           ],
         ),
       ),
